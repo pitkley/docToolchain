@@ -3,6 +3,12 @@
  */
 buildscript {
     repositories {
+        if (gradle.hasProperty('extraJcenterUrls')) {
+            gradle.ext.extraJcenterUrls.each {
+                mavenUrl ->
+                    return maven { url mavenUrl }
+            }
+        }
         jcenter()
         maven {
             url 'https://plugins.gradle.org/m2/'
